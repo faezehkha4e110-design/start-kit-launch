@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -18,6 +19,9 @@ const Intake = () => {
     projectDescription: "",
     interfaceType: "",
     targetDataRate: "",
+    ndaRequired: false,
+    urgencyLevel: "Standard (3–5 business days)",
+    preferredResponseTime: "",
   });
   const [files, setFiles] = useState({
     schematic: null as File | null,
@@ -61,6 +65,9 @@ const Intake = () => {
           project_description: formData.projectDescription,
           interface_type: formData.interfaceType || null,
           target_data_rate: formData.targetDataRate || null,
+          nda_required: formData.ndaRequired,
+          urgency_level: formData.urgencyLevel,
+          preferred_response_time: formData.preferredResponseTime || null,
         })
         .select()
         .single();
@@ -114,7 +121,7 @@ const Intake = () => {
           <div className="bg-card p-12 rounded-lg border border-border">
             <h1 className="text-3xl font-bold text-foreground mb-4">Thanks — your design has been submitted.</h1>
             <p className="text-lg text-muted-foreground">
-              I'll review the files and get back to you by email with a preliminary SI/PI risk breakdown.
+              I'll review the files and get back to you at the email you provided with a preliminary SI/PI risk breakdown and next-step options.
             </p>
           </div>
         </div>
@@ -237,9 +244,61 @@ const Intake = () => {
             />
           </div>
 
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? "Submitting..." : "Submit for Review"}
-          </Button>
+          <div className="space-y-3">
+            <div className="flex items-start space-x-3">
+              <Checkbox
+                id="nda"
+                required
+                checked={formData.ndaRequired}
+                onCheckedChange={(checked) => setFormData({ ...formData, ndaRequired: checked === true })}
+              />
+              <div className="space-y-1">
+                <Label htmlFor="nda" className="font-normal cursor-pointer">
+                  We can sign an NDA before you share sensitive details if needed. *
+                </Label>
+                <p className="text-sm text-muted-foreground">
+                  Check this if you require an NDA. I will follow up by email.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="urgencyLevel">Urgency Level *</Label>
+            <Select required value={formData.urgencyLevel} onValueChange={(value) => setFormData({ ...formData, urgencyLevel: value })}>
+              <SelectTrigger id="urgencyLevel">
+                <SelectValue placeholder="Select urgency level" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Standard (3–5 business days)">Standard (3–5 business days)</SelectItem>
+                <SelectItem value="Faster review if possible">Faster review if possible</SelectItem>
+                <SelectItem value="Just exploring options">Just exploring options</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="preferredResponseTime">Preferred Response Time</Label>
+            <Select value={formData.preferredResponseTime} onValueChange={(value) => setFormData({ ...formData, preferredResponseTime: value })}>
+              <SelectTrigger id="preferredResponseTime">
+                <SelectValue placeholder="Select preferred response time" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Within 24–48 hours">Within 24–48 hours</SelectItem>
+                <SelectItem value="Within 3–5 days">Within 3–5 days</SelectItem>
+                <SelectItem value="Flexible">Flexible</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="pt-4 space-y-4">
+            <p className="text-sm text-muted-foreground">
+              Your files are stored securely in Lovable Cloud and used only for reviewing your design. If you prefer to share links instead of uploads, mention it in the project description.
+            </p>
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Submit for Review"}
+            </Button>
+          </div>
         </form>
       </div>
     </div>

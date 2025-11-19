@@ -23,10 +23,13 @@ export type Database = {
           interface_type: string | null
           layout_url: string | null
           name: string
+          nda_required: boolean
+          preferred_response_time: string | null
           project_description: string
           schematic_url: string | null
           stackup_url: string | null
           target_data_rate: string | null
+          urgency_level: string
         }
         Insert: {
           company?: string | null
@@ -36,10 +39,13 @@ export type Database = {
           interface_type?: string | null
           layout_url?: string | null
           name: string
+          nda_required?: boolean
+          preferred_response_time?: string | null
           project_description: string
           schematic_url?: string | null
           stackup_url?: string | null
           target_data_rate?: string | null
+          urgency_level?: string
         }
         Update: {
           company?: string | null
@@ -49,10 +55,13 @@ export type Database = {
           interface_type?: string | null
           layout_url?: string | null
           name?: string
+          nda_required?: boolean
+          preferred_response_time?: string | null
           project_description?: string
           schematic_url?: string | null
           stackup_url?: string | null
           target_data_rate?: string | null
+          urgency_level?: string
         }
         Relationships: []
       }
