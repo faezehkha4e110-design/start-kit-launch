@@ -26,7 +26,7 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const data: SubmissionNotificationRequest = await req.json();
-    console.log("Processing submission notification for:", data.email);
+    console.log("Processing submission notification for submission:", data.submission_id);
 
     // Send notification to admin
     const adminEmail = await resend.emails.send({
@@ -48,7 +48,7 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Admin email sent:", adminEmail);
+    console.log("Admin email sent:", { id: adminEmail.data?.id, status: 'success' });
 
     // Send auto-response to user
     const userEmail = await resend.emails.send({
@@ -67,7 +67,7 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("User email sent:", userEmail);
+    console.log("User email sent:", { id: userEmail.data?.id, status: 'success' });
 
     return new Response(
       JSON.stringify({ success: true, adminEmail, userEmail }),
