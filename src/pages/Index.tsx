@@ -61,6 +61,19 @@ const Index = () => {
           </div>
         </div>
       </section>
+      <section className="py-16">
+        <div className="max-w-3xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-6">What You Receive</h2>
+
+          <ul className="space-y-3 text-lg text-gray-700">
+            <li>✔ A structured SI/PI risk report</li>
+            <li>✔ High / Medium / Low severity analysis</li>
+            <li>✔ Root-cause explanations</li>
+            <li>✔ Routing, PDN, and stackup fixes</li>
+            <li>✔ Optional simulation recommendations</li>
+          </ul>
+        </div>
+      </section>
 
       {/* Features Section */}
       <section className="bg-secondary/30 py-20">
