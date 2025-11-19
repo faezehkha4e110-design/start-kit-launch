@@ -32,7 +32,7 @@ const Index = () => {
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl font-bold text-primary">1</span>
             </div>
-            <h3 className="text-xl font-semibold text-foreground">Upload Your Files</h3>
+            <h3 className="text-xl font-semibold text-foreground">Upload Your Design Files</h3>
             <p className="text-muted-foreground">
               Upload your schematic (PDF), stackup (image or PDF), and layout snapshots
             </p>
