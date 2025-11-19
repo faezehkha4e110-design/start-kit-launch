@@ -8,6 +8,22 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { z } from "zod";
+
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const ALLOWED_FILE_TYPES = ['application/pdf', 'image/png', 'image/jpeg'];
+
+const submissionSchema = z.object({
+  name: z.string().trim().min(1, 'Name is required').max(100, 'Name must be less than 100 characters'),
+  email: z.string().trim().email('Invalid email address').max(255, 'Email must be less than 255 characters'),
+  company: z.string().trim().max(200, 'Company name must be less than 200 characters').optional(),
+  projectDescription: z.string().trim().min(10, 'Description must be at least 10 characters').max(5000, 'Description must be less than 5000 characters'),
+  interfaceType: z.string().optional(),
+  targetDataRate: z.string().trim().max(100, 'Data rate must be less than 100 characters').optional(),
+  ndaRequired: z.boolean(),
+  urgencyLevel: z.enum(['Standard (3–5 business days)', 'Faster review if possible', 'Just exploring options']),
+  preferredResponseTime: z.string().optional()
+});
 
 const Intake = () => {
   const navigate = useNavigate();
@@ -35,6 +51,28 @@ const Intake = () => {
     layout: null as File | null
   });
   const handleFileChange = (field: keyof typeof files, file: File | null) => {
+    if (file) {
+      // Validate file size
+      if (file.size > MAX_FILE_SIZE) {
+        toast({
+          title: "File too large",
+          description: `Maximum file size is ${MAX_FILE_SIZE / 1024 / 1024}MB`,
+          variant: "destructive"
+        });
+        return;
+      }
+      
+      // Validate MIME type
+      if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+        toast({
+          title: "Invalid file type",
+          description: "Please upload PDF, PNG, or JPEG files only",
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+    
     setFiles({
       ...files,
       [field]: file
@@ -82,21 +120,35 @@ const Intake = () => {
         throw new Error("You must be signed in to submit");
       }
 
-      // Create submission record first
+      // Validate form data
+      const validationResult = submissionSchema.safeParse(formData);
+      if (!validationResult.success) {
+        toast({
+          title: "Validation Error",
+          description: validationResult.error.errors[0].message,
+          variant: "destructive"
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      const validData = validationResult.data;
+
+      // Create submission record first with validated data
       const {
         data: submission,
         error: submissionError
       } = await supabase.from('submissions').insert({
         user_id: user.id,
-        name: formData.name,
-        email: formData.email,
-        company: formData.company || null,
-        project_description: formData.projectDescription,
-        interface_type: formData.interfaceType || null,
-        target_data_rate: formData.targetDataRate || null,
-        nda_required: formData.ndaRequired,
-        urgency_level: formData.urgencyLevel,
-        preferred_response_time: formData.preferredResponseTime || null
+        name: validData.name,
+        email: validData.email,
+        company: validData.company || null,
+        project_description: validData.projectDescription,
+        interface_type: validData.interfaceType || null,
+        target_data_rate: validData.targetDataRate || null,
+        nda_required: validData.ndaRequired,
+        urgency_level: validData.urgencyLevel,
+        preferred_response_time: validData.preferredResponseTime || null
       }).select().single();
       if (submissionError) throw submissionError;
 
@@ -123,13 +175,11 @@ const Intake = () => {
       try {
         await supabase.functions.invoke('send-submission-notification', {
           body: {
-            name: formData.name,
-            email: formData.email,
-            company: formData.company,
-            urgency_level: formData.urgencyLevel,
-            interface_type: formData.interfaceType,
-            target_data_rate: formData.targetDataRate,
-            project_description: formData.projectDescription,
+            name: validData.name,
+            email: validData.email,
+            company: validData.company,
+            urgency_level: validData.urgencyLevel,
+            project_description: validData.projectDescription,
             submission_id: submission.id
           }
         });
