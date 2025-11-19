@@ -44,7 +44,7 @@ const Index = () => {
             </div>
             <h3 className="text-xl font-semibold text-foreground">AI-Assisted SI/PI Analysis</h3>
             <p className="text-muted-foreground">
-              The AI SI/PI Copilot pre-analyzes stackup, return paths, vias, PDN, and interfaces
+              My custom SI/PI AI Copilot pre-analyzes: stackup feasibility, return paths, vias and transitions, PDN noise risks, DDR/PCIe/SerDes constraints, advanced substrate/interposer behavior
             </p>
           </div>
 
