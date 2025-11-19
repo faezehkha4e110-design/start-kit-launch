@@ -1,20 +1,23 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
 const Intake = () => {
-  const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    company: "",
     projectDescription: "",
+    interfaceType: "",
+    targetDataRate: "",
   });
   const [files, setFiles] = useState({
     schematic: null as File | null,
@@ -54,7 +57,10 @@ const Intake = () => {
         .insert({
           name: formData.name,
           email: formData.email,
+          company: formData.company || null,
           project_description: formData.projectDescription,
+          interface_type: formData.interfaceType || null,
+          target_data_rate: formData.targetDataRate || null,
         })
         .select()
         .single();
@@ -84,11 +90,11 @@ const Intake = () => {
 
       toast({
         title: "Submission received",
-        description: "Redirecting to chat interface...",
+        description: "Thank you for submitting your design!",
       });
 
-      // Navigate to chat with submission data
-      navigate('/chat', { state: { submissionId: submission.id, formData } });
+      // Show success message
+      setIsSubmitted(true);
     } catch (error) {
       console.error('Error submitting form:', error);
       toast({
@@ -101,13 +107,28 @@ const Intake = () => {
     }
   };
 
+  if (isSubmitted) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="container max-w-2xl mx-auto px-4 text-center">
+          <div className="bg-card p-12 rounded-lg border border-border">
+            <h1 className="text-3xl font-bold text-foreground mb-4">Thanks — your design has been submitted.</h1>
+            <p className="text-lg text-muted-foreground">
+              I'll review the files and get back to you by email with a preliminary SI/PI risk breakdown.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container max-w-3xl mx-auto px-4 py-16">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-4">Submit Your Review Request</h1>
+          <h1 className="text-4xl font-bold text-foreground mb-4">Start Your SI/PI Review</h1>
           <p className="text-muted-foreground">
-            Fill out the form below to get started with your SI/PI analysis.
+            Share your design context and files so I can run an AI-assisted SI/PI review.
           </p>
         </div>
 
@@ -124,7 +145,7 @@ const Intake = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email *</Label>
+            <Label htmlFor="email">Work Email *</Label>
             <Input
               id="email"
               type="email"
@@ -136,14 +157,53 @@ const Intake = () => {
           </div>
 
           <div className="space-y-2">
+            <Label htmlFor="company">Company / Team</Label>
+            <Input
+              id="company"
+              value={formData.company}
+              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+              placeholder="Your company or team name"
+            />
+          </div>
+
+          <div className="space-y-2">
             <Label htmlFor="description">Project Description *</Label>
             <Textarea
               id="description"
               required
               value={formData.projectDescription}
               onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })}
-              placeholder="Describe your project, interfaces (DDR, PCIe, SerDes), and any specific concerns..."
+              placeholder="What are you building and what are your main SI/PI concerns?"
               rows={4}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="interfaceType">Interface Type</Label>
+            <Select value={formData.interfaceType} onValueChange={(value) => setFormData({ ...formData, interfaceType: value })}>
+              <SelectTrigger id="interfaceType">
+                <SelectValue placeholder="Select interface type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="DDR4">DDR4</SelectItem>
+                <SelectItem value="DDR5">DDR5</SelectItem>
+                <SelectItem value="PCIe Gen4">PCIe Gen4</SelectItem>
+                <SelectItem value="PCIe Gen5">PCIe Gen5</SelectItem>
+                <SelectItem value="PCIe Gen6">PCIe Gen6</SelectItem>
+                <SelectItem value="SerDes 56G">SerDes 56G</SelectItem>
+                <SelectItem value="SerDes 112G">SerDes 112G</SelectItem>
+                <SelectItem value="Other">Other</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="targetDataRate">Target Data Rate</Label>
+            <Input
+              id="targetDataRate"
+              value={formData.targetDataRate}
+              onChange={(e) => setFormData({ ...formData, targetDataRate: e.target.value })}
+              placeholder="e.g., 25 Gbps, 3200 MT/s"
             />
           </div>
 
@@ -178,7 +238,7 @@ const Intake = () => {
           </div>
 
           <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? "Submitting..." : "Submit Review Request"}
+            {isSubmitting ? "Submitting..." : "Submit for Review"}
           </Button>
         </form>
       </div>
