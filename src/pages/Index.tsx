@@ -10,7 +10,7 @@ const Index = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
         <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-          AI-Assisted SI/PI Reviews for<br />High-Speed Boards & Advanced Packages
+          AI-Assisted SI/PI Reviews for<br />High-Speed Boards, Packages & Interposers
         </h1>
         <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
           I help hardware teams de-risk DDR, PCIe, SerDes, and advanced substrates using senior SI/PI expertise supported by a custom engineering AI copilot.
