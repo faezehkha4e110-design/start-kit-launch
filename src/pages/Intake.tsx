@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,7 +7,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
+
 const Intake = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState<any>(null);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const {
     toast
   } = useToast();
@@ -50,15 +55,39 @@ const Intake = () => {
     } = supabase.storage.from('review-files').getPublicUrl(filePath);
     return urlData.publicUrl;
   };
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      navigate("/auth");
+      return;
+    }
+    setUser(user);
+    setIsCheckingAuth(false);
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate("/auth");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
+      if (!user) {
+        throw new Error("You must be signed in to submit");
+      }
+
       // Create submission record first
       const {
         data: submission,
         error: submissionError
       } = await supabase.from('submissions').insert({
+        user_id: user.id,
         name: formData.name,
         email: formData.email,
         company: formData.company || null,
@@ -127,6 +156,13 @@ const Intake = () => {
       setIsSubmitting(false);
     }
   };
+  
+  if (isCheckingAuth) {
+    return <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+      <p>Loading...</p>
+    </div>;
+  }
+  
   if (isSubmitted) {
     return <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="container max-w-2xl mx-auto px-4 text-center">
@@ -141,6 +177,9 @@ const Intake = () => {
   }
   return <div className="min-h-screen bg-background">
       <div className="container max-w-3xl mx-auto px-4 py-16">
+        <div className="flex justify-end mb-4">
+          <Button onClick={handleSignOut} variant="outline">Sign Out</Button>
+        </div>
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-foreground mb-4">Start Your SI/PI Review</h1>
           <p className="text-muted-foreground">
