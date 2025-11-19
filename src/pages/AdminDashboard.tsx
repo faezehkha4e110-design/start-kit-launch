@@ -43,12 +43,23 @@ const AdminDashboard = () => {
       }
 
       // Check if user is admin
-      const { data: roles } = await supabase
+      const { data: roles, error: roleError } = await supabase
         .from('user_roles')
         .select('role')
         .eq('user_id', user.id)
         .eq('role', 'admin')
-        .single();
+        .maybeSingle();
+
+      if (roleError) {
+        console.error('Error checking admin role:', roleError);
+        toast({
+          title: "Error",
+          description: "Unable to verify permissions.",
+          variant: "destructive",
+        });
+        navigate("/intake");
+        return;
+      }
 
       if (!roles) {
         toast({
