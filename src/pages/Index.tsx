@@ -13,7 +13,7 @@ const Index = () => {
           AI-Assisted SI/PI Reviews for<br />High-Speed Boards, Packages & Interposers
         </h1>
         <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-          I help hardware teams de-risk DDR, PCIe, SerDes, and advanced substrates using senior SI/PI expertise supported by a custom engineering AI copilot.
+          I help hardware teams de-risk DDR, PCIe, SerDes, and advanced packaging using senior SI/PI expertise supported by a custom engineering AI copilot.
         </p>
         <Button 
           size="lg" 
