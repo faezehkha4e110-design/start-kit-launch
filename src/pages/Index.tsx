@@ -42,7 +42,7 @@ const Index = () => {
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl font-bold text-primary">2</span>
             </div>
-            <h3 className="text-xl font-semibold text-foreground">AI Pre-Analysis</h3>
+            <h3 className="text-xl font-semibold text-foreground">AI-Assisted SI/PI Analysis</h3>
             <p className="text-muted-foreground">
               The AI SI/PI Copilot pre-analyzes stackup, return paths, vias, PDN, and interfaces
             </p>
