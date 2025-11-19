@@ -3,8 +3,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle2 } from "lucide-react";
 const Index = () => {
   const navigate = useNavigate();
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
         <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
@@ -44,8 +43,13 @@ const Index = () => {
             </div>
             <h3 className="text-xl font-semibold text-foreground">AI Pre-Analysis</h3>
             <p className="text-muted-foreground">
-              My custom SI/PI AI Copilot pre-analyzes: stackup feasibility return paths vias and transitions PDN noise
-              risks DDR/PCIe/SerDes constraints advanced substrate/interposer behavior
+              My SI/PI Copilot pre-analyzes your design for:
+• Stackup feasibility
+• Return-path quality
+• Via and layer-transition risks
+• PDN noise sensitivity
+• DDR / PCIe / SerDes constraints
+• Substrate / interposer behavior
             </p>
           </div>
 
@@ -81,24 +85,14 @@ const Index = () => {
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-center text-foreground mb-12">Comprehensive Analysis Coverage</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              {[
-                "Transmission-line behavior",
-                "Return path integrity",
-                "PDN (Power Distribution Network)",
-                "Via transitions",
-                "Crosstalk analysis",
-                "Advanced packaging considerations",
-              ].map((feature, index) => (
-                <div key={index} className="flex items-start gap-3">
+              {["Transmission-line behavior", "Return path integrity", "PDN (Power Distribution Network)", "Via transitions", "Crosstalk analysis", "Advanced packaging considerations"].map((feature, index) => <div key={index} className="flex items-start gap-3">
                   <CheckCircle2 className="text-primary mt-1 flex-shrink-0" size={20} />
                   <span className="text-foreground">{feature}</span>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
 export default Index;
