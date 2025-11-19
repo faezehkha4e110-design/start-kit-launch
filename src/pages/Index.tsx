@@ -34,7 +34,7 @@ const Index = () => {
             </div>
             <h3 className="text-xl font-semibold text-foreground">Upload Your Design Files</h3>
             <p className="text-muted-foreground">
-              Upload your schematic (PDF), stackup (image or PDF), and layout snapshots
+              Send your schematic, proposed stackup, and layout snapshots (memory region, breakout, connectors, or critical lanes).
             </p>
           </div>
 
