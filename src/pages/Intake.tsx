@@ -95,6 +95,26 @@ const Intake = () => {
           .eq('id', submission.id);
       }
 
+      // Send email notifications
+      try {
+        await supabase.functions.invoke('send-submission-notification', {
+          body: {
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            urgency_level: formData.urgencyLevel,
+            interface_type: formData.interfaceType,
+            target_data_rate: formData.targetDataRate,
+            project_description: formData.projectDescription,
+            submission_id: submission.id,
+          },
+        });
+        console.log("Email notifications sent successfully");
+      } catch (emailError) {
+        console.error("Error sending email notifications:", emailError);
+        // Don't fail the submission if email fails
+      }
+
       toast({
         title: "Submission received",
         description: "Thank you for submitting your design!",
