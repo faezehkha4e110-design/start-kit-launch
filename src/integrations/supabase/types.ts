@@ -16,34 +16,43 @@ export type Database = {
     Tables: {
       submissions: {
         Row: {
+          company: string | null
           created_at: string | null
           email: string
           id: string
+          interface_type: string | null
           layout_url: string | null
           name: string
           project_description: string
           schematic_url: string | null
           stackup_url: string | null
+          target_data_rate: string | null
         }
         Insert: {
+          company?: string | null
           created_at?: string | null
           email: string
           id?: string
+          interface_type?: string | null
           layout_url?: string | null
           name: string
           project_description: string
           schematic_url?: string | null
           stackup_url?: string | null
+          target_data_rate?: string | null
         }
         Update: {
+          company?: string | null
           created_at?: string | null
           email?: string
           id?: string
+          interface_type?: string | null
           layout_url?: string | null
           name?: string
           project_description?: string
           schematic_url?: string | null
           stackup_url?: string | null
+          target_data_rate?: string | null
         }
         Relationships: []
       }
