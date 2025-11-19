@@ -313,7 +313,7 @@ const Intake = () => {
 
           <div className="pt-4 space-y-4">
             <p className="text-sm text-muted-foreground">
-              Your files are stored securely in Lovable Cloud and used only for reviewing your design. If you prefer to share links instead of uploads, mention it in the project description.
+              All uploaded schematics, stackups, and layouts remain confidential and are used solely for SI/PI analysis. Your files are never shared.
             </p>
             <Button type="submit" className="w-full" disabled={isSubmitting}>
               {isSubmitting ? "Submitting..." : "Submit for Review"}
