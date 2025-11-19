@@ -58,10 +58,11 @@ const Index = () => {
               <span className="text-2xl font-bold text-primary">3</span>
             </div>
             <h3 className="text-xl font-semibold text-foreground">Receive a Structured Risk Report</h3>
-            <p className="text-muted-foreground">
-              You get a clear, actionable review with: High / Medium / Low risks Root-cause explanations Exact routing /
-              PDN / stackup fixes Optional simulation recommendations
-            </p>
+            <p className="text-muted-foreground">✔ A structured SI/PI risk report
+✔ High / Medium / Low severity analysis
+✔ Root-cause explanations
+✔ Routing, PDN, stackup fixes
+✔ Optional simulation recommendations</p>
           </div>
         </div>
       </section>
