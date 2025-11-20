@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
 const Index = () => {
   const navigate = useNavigate();
@@ -73,6 +74,142 @@ const Index = () => {
             <li>✔ Routing, PDN, and stackup fixes</li>
             <li>✔ Optional simulation recommendations</li>
           </ul>
+        </div>
+      </section>
+
+      {/* Real Examples Section */}
+      <section className="container mx-auto px-4 py-20">
+        <h2 className="text-4xl font-bold text-center text-foreground mb-4">Real Examples of AI-Assisted SI/PI Review</h2>
+        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          See how our AI copilot helps identify critical signal integrity issues before they become costly problems
+        </p>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="text-xl">DDR5 Memory Interface</CardTitle>
+              <CardDescription>High-speed server motherboard</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div>
+                <p className="font-semibold text-sm text-destructive mb-1">Challenge:</p>
+                <p className="text-sm text-muted-foreground">Inconsistent trace impedance causing signal reflections at 6.4 Gbps</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-primary mb-1">AI Solution:</p>
+                <p className="text-sm text-muted-foreground">Identified stackup mismatch and recommended trace width adjustments</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
+                <p className="text-sm text-muted-foreground">Eye diagram improved by 35%, first-pass success achieved</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="text-xl">PCIe Gen5 Routing</CardTitle>
+              <CardDescription>GPU accelerator card</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div>
+                <p className="font-semibold text-sm text-destructive mb-1">Challenge:</p>
+                <p className="text-sm text-muted-foreground">Via transitions causing insertion loss at 32 GT/s data rate</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-primary mb-1">AI Solution:</p>
+                <p className="text-sm text-muted-foreground">Detected return path discontinuities and suggested via stub mitigation</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
+                <p className="text-sm text-muted-foreground">Reduced insertion loss by 2.1 dB, passed compliance testing</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="text-xl">Advanced Package Substrate</CardTitle>
+              <CardDescription>High-performance compute module</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div>
+                <p className="font-semibold text-sm text-destructive mb-1">Challenge:</p>
+                <p className="text-sm text-muted-foreground">PDN resonance causing voltage droop during power transients</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-primary mb-1">AI Solution:</p>
+                <p className="text-sm text-muted-foreground">Analyzed decoupling strategy and recommended capacitor placement optimization</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
+                <p className="text-sm text-muted-foreground">Voltage ripple reduced from 180mV to 45mV, stable operation achieved</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="text-xl">SerDes Eye Margin</CardTitle>
+              <CardDescription>Network switch backplane</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div>
+                <p className="font-semibold text-sm text-destructive mb-1">Challenge:</p>
+                <p className="text-sm text-muted-foreground">Poor eye opening at 28 Gbps due to crosstalk and ISI</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-primary mb-1">AI Solution:</p>
+                <p className="text-sm text-muted-foreground">Identified aggressor traces and recommended spacing and guard traces</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
+                <p className="text-sm text-muted-foreground">Eye height increased by 28%, BER improved to specification</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="text-xl">FPGA Power Integrity</CardTitle>
+              <CardDescription>Industrial control system</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div>
+                <p className="font-semibold text-sm text-destructive mb-1">Challenge:</p>
+                <p className="text-sm text-muted-foreground">Ground bounce affecting sensitive analog measurements</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-primary mb-1">AI Solution:</p>
+                <p className="text-sm text-muted-foreground">Analyzed ground plane segmentation and return current paths</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
+                <p className="text-sm text-muted-foreground">Ground noise reduced by 65%, measurement accuracy restored</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="text-xl">Multi-Gigabit Ethernet</CardTitle>
+              <CardDescription>Automotive gateway module</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div>
+                <p className="font-semibold text-sm text-destructive mb-1">Challenge:</p>
+                <p className="text-sm text-muted-foreground">EMI radiation exceeding automotive standards at 10 Gbps</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-primary mb-1">AI Solution:</p>
+                <p className="text-sm text-muted-foreground">Flagged reference plane splits and suggested routing modifications</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
+                <p className="text-sm text-muted-foreground">EMI reduced by 18 dB, passed CISPR 25 Class 5 requirements</p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
