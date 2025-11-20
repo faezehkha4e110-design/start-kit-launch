@@ -210,6 +210,27 @@ const Index = () => {
               </div>
             </CardContent>
           </Card>
+
+          <Card className="hover:shadow-lg transition-shadow border-primary/40">
+            <CardHeader>
+              <CardTitle className="text-xl">56 GHz FOPLP Package</CardTitle>
+              <CardDescription>Fan-out panel-level package with 2-layer RDL</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div>
+                <p className="font-semibold text-sm text-destructive mb-1">Challenge:</p>
+                <p className="text-sm text-muted-foreground">Complex bump-to-ball routing at 80 µm pitch with asymmetric ground shielding and power coupling risks</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-primary mb-1">AI Solution (Pre-Simulation):</p>
+                <p className="text-sm text-muted-foreground">Flagged uneven return paths, power bump proximity to HS lanes, non-mirrored RDL geometry, and crosstalk hotspots—all before EM simulation</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
+                <p className="text-sm text-muted-foreground">Prevented mode conversion and PDN coupling issues, saved weeks of simulation iterations and potential substrate respin</p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
