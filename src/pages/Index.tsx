@@ -101,7 +101,7 @@ const Index = () => {
               </div>
               <div>
                 <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
-                <p className="text-sm text-muted-foreground">Eye diagram improved by 35%, first-pass success achieved</p>
+                <p className="text-sm text-muted-foreground">Eye margin restored to JEDEC compliance spec, avoided board respin</p>
               </div>
             </CardContent>
           </Card>
@@ -122,7 +122,7 @@ const Index = () => {
               </div>
               <div>
                 <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
-                <p className="text-sm text-muted-foreground">Reduced insertion loss by 2.1 dB, passed compliance testing</p>
+                <p className="text-sm text-muted-foreground">Insertion loss brought within Gen5 specification limits, passed compliance</p>
               </div>
             </CardContent>
           </Card>
@@ -143,7 +143,7 @@ const Index = () => {
               </div>
               <div>
                 <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
-                <p className="text-sm text-muted-foreground">Voltage ripple reduced from 180mV to 45mV, stable operation achieved</p>
+                <p className="text-sm text-muted-foreground">Voltage droop controlled within safe operating limits, system stable under load</p>
               </div>
             </CardContent>
           </Card>
@@ -164,7 +164,7 @@ const Index = () => {
               </div>
               <div>
                 <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
-                <p className="text-sm text-muted-foreground">Eye height increased by 28%, BER improved to specification</p>
+                <p className="text-sm text-muted-foreground">Eye opening improved enough for reliable link operation at full rate</p>
               </div>
             </CardContent>
           </Card>
@@ -185,7 +185,7 @@ const Index = () => {
               </div>
               <div>
                 <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
-                <p className="text-sm text-muted-foreground">Ground noise reduced by 65%, measurement accuracy restored</p>
+                <p className="text-sm text-muted-foreground">Ground bounce suppressed below analog threshold, clean measurements restored</p>
               </div>
             </CardContent>
           </Card>
@@ -206,7 +206,7 @@ const Index = () => {
               </div>
               <div>
                 <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
-                <p className="text-sm text-muted-foreground">EMI reduced by 18 dB, passed CISPR 25 Class 5 requirements</p>
+                <p className="text-sm text-muted-foreground">EMI emissions brought within CISPR 25 Class 5 limits, passed certification</p>
               </div>
             </CardContent>
           </Card>
