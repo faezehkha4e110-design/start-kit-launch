@@ -48,7 +48,7 @@ const handler = async (req: Request): Promise<Response> => {
     const { data: { user }, error: authError } = await supabaseClient.auth.getUser();
     
     if (authError || !user) {
-      console.error('Authentication failed:', authError?.message);
+      console.error('Authentication failed');
       return new Response(
         JSON.stringify({ error: 'Unauthorized - Invalid token' }), 
         { 
@@ -58,7 +58,7 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    console.log('Authenticated user:', user.id);
+    console.log('User authenticated successfully');
 
     const data: SubmissionNotificationRequest = await req.json();
     
@@ -70,7 +70,7 @@ const handler = async (req: Request): Promise<Response> => {
       .maybeSingle();
       
     if (submissionError || !submission || submission.user_id !== user.id) {
-      console.error('Submission access denied:', submissionError?.message);
+      console.error('Submission access denied');
       return new Response(
         JSON.stringify({ error: 'Forbidden - Not your submission' }), 
         { 
@@ -80,7 +80,7 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
     
-    console.log("Processing submission notification for submission:", data.submission_id);
+    console.log("Processing submission notification");
 
     // Send notification to admin
     const adminEmail = await resend.emails.send({

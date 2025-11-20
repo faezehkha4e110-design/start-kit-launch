@@ -34,7 +34,7 @@ serve(async (req) => {
     const { data: { user }, error: authError } = await supabaseClient.auth.getUser();
     
     if (authError || !user) {
-      console.error('Authentication failed:', authError?.message);
+      console.error('Authentication failed');
       return new Response(
         JSON.stringify({ error: 'Unauthorized - Invalid token' }), 
         { 
@@ -44,7 +44,7 @@ serve(async (req) => {
       );
     }
 
-    console.log('Authenticated user:', user.id);
+    console.log('User authenticated successfully');
 
     const { messages, submissionId } = await req.json();
     
