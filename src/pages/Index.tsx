@@ -211,6 +211,27 @@ const Index = () => {
             </CardContent>
           </Card>
 
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="text-xl">PIC Module Test Board</CardTitle>
+              <CardDescription>High-speed electro-optic measurement board</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div>
+                <p className="font-semibold text-sm text-destructive mb-1">Challenge:</p>
+                <p className="text-sm text-muted-foreground">Routing 100 Ω differential pair from RC test connector to PIC module at 28 GHz with tight pad escape and dense stitching vias</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-primary mb-1">AI Solution:</p>
+                <p className="text-sm text-muted-foreground">Identified asymmetric pad entry, return-path breaks under S-curve, impedance dip at neck-down, and uneven via field coupling</p>
+              </div>
+              <div>
+                <p className="font-semibold text-sm text-foreground mb-1">Result:</p>
+                <p className="text-sm text-muted-foreground">Mirrored pad breakout and optimized ground stitching stabilized 100 Ω impedance, reduced Sdd11 ripple for cleaner eye openings</p>
+              </div>
+            </CardContent>
+          </Card>
+
           <Card className="hover:shadow-lg transition-shadow border-primary/40">
             <CardHeader>
               <CardTitle className="text-xl">56 GHz FOPLP Package</CardTitle>
