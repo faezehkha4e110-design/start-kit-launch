@@ -42,16 +42,11 @@ const AdminDashboard = () => {
         return;
       }
 
-      // Check if user is admin
-      const { data: roles, error: roleError } = await supabase
-        .from('user_roles')
-        .select('role')
-        .eq('user_id', user.id)
-        .eq('role', 'admin')
-        .maybeSingle();
+      // Verify admin access via server-side edge function
+      const { data: adminData, error: verifyError } = await supabase.functions.invoke('verify-admin-access');
 
-      if (roleError) {
-        console.error('Error checking admin role:', roleError);
+      if (verifyError) {
+        console.error('Error verifying admin access:', verifyError);
         toast({
           title: "Error",
           description: "Unable to verify permissions.",
@@ -61,7 +56,7 @@ const AdminDashboard = () => {
         return;
       }
 
-      if (!roles) {
+      if (!adminData?.isAdmin) {
         toast({
           title: "Access Denied",
           description: "You don't have admin privileges.",
