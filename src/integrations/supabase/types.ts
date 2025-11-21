@@ -30,7 +30,7 @@ export type Database = {
           stackup_url: string | null
           target_data_rate: string | null
           urgency_level: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           company?: string | null
@@ -47,7 +47,7 @@ export type Database = {
           stackup_url?: string | null
           target_data_rate?: string | null
           urgency_level?: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           company?: string | null
@@ -64,7 +64,7 @@ export type Database = {
           stackup_url?: string | null
           target_data_rate?: string | null
           urgency_level?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
