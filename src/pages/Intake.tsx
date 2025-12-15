@@ -273,10 +273,10 @@ const Intake = () => {
 
     <div className="container max-w-3xl mx-auto px-4 py-12">
       <div className="mb-10">
-        <p className="text-primary font-medium mb-2 tracking-wide uppercase text-sm">SI/PI Brain</p>
-        <h1 className="text-4xl font-bold text-foreground mb-4">Submit Your Design for Review</h1>
+        <p className="text-primary font-medium mb-3 tracking-wide uppercase text-sm">AI-Assisted SI/PI Reviews for High-Speed Boards, Packages & Interposers</p>
+        <h1 className="text-3xl font-bold text-foreground mb-4">Submit Your Design for Review</h1>
         <p className="text-muted-foreground text-lg">
-          Share your design context and files for an AI-assisted SI/PI analysis by the Eternawave engineering team.
+          Hardware teams gain confidence in DDR, PCIe, SerDes, and advanced packaging through senior SI/PI expertise powered by a custom engineering AI copilot.
         </p>
       </div>
 
